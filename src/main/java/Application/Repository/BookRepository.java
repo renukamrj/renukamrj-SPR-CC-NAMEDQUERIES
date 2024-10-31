@@ -2,6 +2,7 @@ package Application.Repository;
 
 import Application.Model.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -50,6 +51,7 @@ import java.util.List;
  *
  *     The test cases for this lab will attempt to identify the query methods you've written and run them.
  */
+
 public interface BookRepository extends JpaRepository<Book, Long> {
 
     /**
@@ -57,13 +59,13 @@ public interface BookRepository extends JpaRepository<Book, Long> {
      * @param isbn a long that identifies distinct books.
      * @return the book with a particular ISBN
      */
-    Book findBookByIsbn(long isbn);
+    public Book findBookByIsbn(long isbn);
     /**
      * This query will return a List of books that match a certain Author string for the Author field.
      * @param author
      * @return
      */
-    List<Book> findBooksByAuthor(String author);
+    public List<Book> findBooksByAuthor(String author);
 
     /**
      * More complex clauses, such as an 'AND' statement, can be written as part of a query method.
@@ -71,19 +73,22 @@ public interface BookRepository extends JpaRepository<Book, Long> {
      * @param dateAdded
      * @return
      */
-    List<Book> findBooksByAuthorAndDateAdded(String author, Timestamp dateAdded);
+    public List<Book> findBooksByAuthorAndDateAdded(String author, Timestamp dateAdded);
+    
 
     /**
      * TODO: Retrieve a book by its title. You may assume that titles are unique and that a single Book entity should
      * be returned, so the return type will be Book.
      */
+    public Book findBookByTitle(String title);
 
     /**
      * TODO: Retrieve books by their availability using the field "available" in the class Book. The return type will be List<Book>.
      */
-
+    public List<Book> findBooksByAvailable(Boolean available);
     /**
      * TODO: Retrieve books by their dateAdded OR their lastDateWithdrawn.
      */
+    public List<Book>findBooksByDateAddedOrLastDateWithdrawn( Timestamp dateAdded,Timestamp lastDateWithdrawn);
 
 }
